@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F9F7F2; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9AC8A6; 
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #569268; 
+}
+
+/* Dark Mode Scrollbar override */
+.dark ::-webkit-scrollbar-track {
+  background: #0F1C15;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #2A4536;
+}
+
+body {
+  @apply bg-soil-50 text-soil-900 dark:bg-night-900 dark:text-soil-50 transition-colors duration-300;
+}

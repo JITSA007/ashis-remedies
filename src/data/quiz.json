@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "question": "How would you describe your body frame?",
+    "category": "Physical",
+    "options": [
+      { "text": "Thin, bony, lanky, difficult to gain weight", "type": "vata" },
+      { "text": "Medium build, athletic, muscular", "type": "pitta" },
+      { "text": "Large, broad, sturdy, easy to gain weight", "type": "kapha" }
+    ],
+    "allowOther": true
+  },
+  {
+    "id": 2,
+    "question": "How is your skin usually?",
+    "category": "Physical",
+    "options": [
+      { "text": "Dry, rough, thin, cool to touch", "type": "vata" },
+      { "text": "Warm, reddish, sensitive, prone to acne/freckles", "type": "pitta" },
+      { "text": "Oily, smooth, thick, cool, pale", "type": "kapha" }
+    ],
+    "allowOther": false
+  },
+  {
+    "id": 3,
+    "question": "How is your sleep pattern?",
+    "category": "Lifestyle",
+    "options": [
+      { "text": "Light, interrupted, often have insomnia", "type": "vata" },
+      { "text": "Sound, medium duration (6-7 hours), refreshing", "type": "pitta" },
+      { "text": "Deep, heavy, hard to wake up (8+ hours)", "type": "kapha" }
+    ],
+    "allowOther": true
+  },
+  {
+    "id": 4,
+    "question": "Describe your appetite and digestion.",
+    "category": "Digestion",
+    "options": [
+      { "text": "Irregular; sometimes hungry, sometimes not. Gas/bloating.", "type": "vata" },
+      { "text": "Strong, sharp hunger; get irritable if I miss a meal. Heartburn.", "type": "pitta" },
+      { "text": "Slow but steady; can skip meals easily. Heavy digestion.", "type": "kapha" }
+    ],
+    "allowOther": false
+  },
+  {
+    "id": 5,
+    "question": "How do you react to weather?",
+    "category": "Environment",
+    "options": [
+      { "text": "I dislike cold and wind; I love warmth.", "type": "vata" },
+      { "text": "I dislike heat and humidity; I overheat easily.", "type": "pitta" },
+      { "text": "I dislike damp and cold weather; I tolerate heat well.", "type": "kapha" }
+    ],
+    "allowOther": false
+  },
+  {
+    "id": 6,
+    "question": "How does your mind work under stress?",
+    "category": "Mental",
+    "options": [
+      { "text": "Anxious, fearful, overthinking, scattered.", "type": "vata" },
+      { "text": "Angry, critical, impatient, frustrated.", "type": "pitta" },
+      { "text": "Calm, withdrawn, maybe stubborn or possessive.", "type": "kapha" }
+    ],
+    "allowOther": true
+  },
+  {
+    "id": 7,
+    "question": "How is your memory and learning style?",
+    "category": "Mental",
+    "options": [
+      { "text": "I learn quickly but forget quickly.", "type": "vata" },
+      { "text": "I have a sharp memory and clear understanding.", "type": "pitta" },
+      { "text": "I learn slowly but have excellent long-term memory.", "type": "kapha" }
+    ],
+    "allowOther": false
+  },
+  {
+    "id": 8,
+    "question": "How do you speak?",
+    "category": "Social",
+    "options": [
+      { "text": "Fast, talkative, sometimes ramble.", "type": "vata" },
+      { "text": "Clear, precise, direct, purposeful.", "type": "pitta" },
+      { "text": "Slow, melodic, quiet, good listener.", "type": "kapha" }
+    ],
+    "allowOther": false
+  },
+  {
+    "id": 9,
+    "question": "What are your energy levels like?",
+    "category": "Lifestyle",
+    "options": [
+      { "text": "Bursts of energy followed by exhaustion.", "type": "vata" },
+      { "text": "Moderate, steady energy; can push through limits.", "type": "pitta" },
+      { "text": "Slow to start, but excellent endurance.", "type": "kapha" }
+    ],
+    "allowOther": true
+  },
+  {
+    "id": 10,
+    "question": "Tell us about your emotional nature.",
+    "category": "Emotional",
+    "options": [
+      { "text": "Enthusiastic, vivacious, changing moods.", "type": "vata" },
+      { "text": "Determined, ambitious, leader-like.", "type": "pitta" },
+      { "text": "Loyal, loving, forgiving, consistent.", "type": "kapha" }
+    ],
+    "allowOther": true
+  }
+]

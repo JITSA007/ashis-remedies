@@ -1,0 +1,34 @@
+[
+  {
+    "id": "ing_turmeric",
+    "name": "Turmeric",
+    "hindiName": "Haldi",
+    "scientificName": "Curcuma longa",
+    "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&q=80&w=400",
+    "properties": ["Anti-inflammatory", "Antioxidant", "Warming"]
+  },
+  {
+    "id": "ing_ginger",
+    "name": "Ginger",
+    "hindiName": "Adrak",
+    "scientificName": "Zingiber officinale",
+    "image": "https://images.unsplash.com/photo-1615485500704-8e99099928b3?auto=format&fit=crop&q=80&w=400",
+    "properties": ["Digestive", "Anti-nausea", "Heating"]
+  },
+  {
+    "id": "ing_tulsi",
+    "name": "Holy Basil",
+    "hindiName": "Tulsi",
+    "scientificName": "Ocimum sanctum",
+    "image": "https://images.unsplash.com/photo-1618331835717-801e976710b2?auto=format&fit=crop&q=80&w=400",
+    "properties": ["Adaptogen", "Antimicrobial", "Respiratory Health"]
+  },
+  {
+    "id": "ing_honey",
+    "name": "Honey",
+    "hindiName": "Madhu",
+    "scientificName": "Apis mellifera",
+    "image": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&q=80&w=400",
+    "properties": ["Soothing", "Antibacterial", "Carrier"]
+  }
+]

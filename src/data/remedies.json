@@ -1,0 +1,55 @@
+[
+  {
+    "id": "rem_golden_milk",
+    "title": "Golden Milk (Haldi Doodh)",
+    "description": "The classic immunity booster for cold nights and healing.",
+    "symptoms": ["Cough", "Insomnia", "Joint Pain", "Low Immunity"],
+    "ingredients": ["ing_turmeric", "ing_honey"],
+    "timeToMake": "10 mins",
+    "difficulty": "Easy",
+    "image": "https://images.unsplash.com/photo-1515543904379-3d757afe72e3?auto=format&fit=crop&q=80&w=600",
+    "preparation": [
+      "Heat 1 cup of milk just before boiling.",
+      "Stir in 1/2 tsp turmeric powder.",
+      "Add a pinch of black pepper (crucial for absorption).",
+      "Sweeten with honey once lukewarm."
+    ],
+    "tradition": "Balances Vata and Kapha doshas. Known as 'Ojas' building (vitality). Warming potency.",
+    "science": "Curcumin in turmeric reduces inflammatory cytokines. Piperine in black pepper increases curcumin absorption by 2000%."
+  },
+  {
+    "id": "rem_ginger_tea",
+    "title": "Ginger Lemon Tea",
+    "description": "A zesty brew to kickstart digestion and fight nausea.",
+    "symptoms": ["Indigestion", "Nausea", "Cold", "Bloating"],
+    "ingredients": ["ing_ginger", "ing_honey"],
+    "timeToMake": "15 mins",
+    "difficulty": "Easy",
+    "image": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&q=80&w=600",
+    "preparation": [
+      "Crush 1 inch of fresh ginger root.",
+      "Boil in 2 cups of water for 10 minutes.",
+      "Strain and add lemon juice.",
+      "Add honey when warm."
+    ],
+    "tradition": "Ignites 'Agni' (digestive fire). Clears 'Ama' (toxins) from the gut.",
+    "science": "Gingerol stimulates saliva and gastric enzymes, speeding up gastric emptying to relieve nausea."
+  },
+  {
+    "id": "rem_tulsi_steam",
+    "title": "Tulsi Steam Inhalation",
+    "description": "Direct relief for congested sinuses and headaches.",
+    "symptoms": ["Sinusitis", "Headache", "Stress"],
+    "ingredients": ["ing_tulsi"],
+    "timeToMake": "5 mins",
+    "difficulty": "Medium",
+    "image": "https://images.unsplash.com/photo-1519699867909-5a589dc5f643?auto=format&fit=crop&q=80&w=600",
+    "preparation": [
+      "Boil a large pot of water with 10-15 fresh Tulsi leaves.",
+      "Remove from heat.",
+      "Cover head with a towel and inhale steam deeply for 5-10 minutes."
+    ],
+    "tradition": "Clears Prana Vaha Srotas (respiratory channels). Sattvic nature calms the mind.",
+    "science": "Essential oils like Eugenol in Tulsi allow for mucolytic action (breaking down mucus) and have antimicrobial effects."
+  }
+]

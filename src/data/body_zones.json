@@ -1,0 +1,60 @@
+{
+  "head": {
+    "name": "Cranial Zone",
+    "description": "Neurological center. Governs Prana (vital life force) and sensory input.",
+    "symptoms": [
+      { "name": "Headache", "type": "common" },
+      { "name": "Migraine", "type": "common" },
+      { "name": "Insomnia", "type": "common" },
+      { "name": "Stress", "type": "common" },
+      { "name": "Hormonal Hair Fall", "type": "female" },
+      { "name": "Male Pattern Baldness", "type": "male" }
+    ]
+  },
+  "chest": {
+    "name": "Thoracic Zone",
+    "description": "Cardiorespiratory system. Heart, lungs, and bronchial capability.",
+    "symptoms": [
+      { "name": "Asthma", "type": "common" },
+      { "name": "Congestion", "type": "common" },
+      { "name": "Palpitations", "type": "common" },
+      { "name": "Anxiety", "type": "common" },
+      { "name": "Breast Tenderness", "type": "female" }
+    ]
+  },
+  "stomach": {
+    "name": "Abdominal Zone",
+    "description": "Digestive system (Agni). Metabolic processing center.",
+    "symptoms": [
+      { "name": "Indigestion", "type": "common" },
+      { "name": "Acidity", "type": "common" },
+      { "name": "Bloating", "type": "common" },
+      { "name": "Liver Issues", "type": "common" },
+      { "name": "Diabetes", "type": "common" }
+    ]
+  },
+  "pelvis": {
+    "name": "Pelvic Zone",
+    "description": "Reproductive organs and elimination systems.",
+    "symptoms": [
+      { "name": "Back Pain", "type": "common" },
+      { "name": "Constipation", "type": "common" },
+      { "name": "UTI", "type": "common" },
+      { "name": "Menstrual Cramps", "type": "female" },
+      { "name": "PCOS / PCOD", "type": "female" },
+      { "name": "Fertility Issues", "type": "female" },
+      { "name": "Prostate Health", "type": "male" }
+    ]
+  },
+  "limbs": {
+    "name": "Musculoskeletal",
+    "description": "Joints, muscles, and circulation pathways.",
+    "symptoms": [
+      { "name": "Arthritis", "type": "common" },
+      { "name": "Joint Pain", "type": "common" },
+      { "name": "Sciatica", "type": "common" },
+      { "name": "Muscle Cramps", "type": "common" },
+      { "name": "Varicose Veins", "type": "common" }
+    ]
+  }
+}

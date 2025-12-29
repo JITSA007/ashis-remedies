@@ -1,0 +1,58 @@
+{
+  "profile": {
+    "name": "Jitendra Prajapat",
+    "headline": "Bridging Silicon & Soil",
+    "role": "Professor | AI Researcher | Farmer",
+    "location": "Jaipur, Rajasthan",
+    "email": "jitsahere@gmail.com",
+    "bio": "By day, I guide students to break and rebuild technology. By night, I tend to the soil. I believe the most complex code often mimics the simplicity of nature."
+  },
+  "halves": {
+    "tech": {
+      "title": "The Professor",
+      "icon": "Cpu",
+      "description": "Researching AI for Tuberculosis diagnosis and teaching Cybersecurity to the next generation.",
+      "points": [
+        "PhD Scholar in Computer Science",
+        "AI/ML Researcher in Healthcare",
+        "Certified Ethical Hacker"
+      ]
+    },
+    "soil": {
+      "title": "The Farmer",
+      "icon": "Sprout",
+      "description": "Rooted in Rajasthan, using technology to solve water crises and preserving Ayurvedic traditions.",
+      "points": [
+        "Social Innovator (Aquantrix)",
+        "Sustainable Water Management",
+        "Ayurveda Enthusiast"
+      ]
+    }
+  },
+  "timeline": [
+    {
+      "year": "2023 - Present",
+      "role": "Assistant Professor & Program Coordinator",
+      "company": "ImaginXP / Jaipur National University",
+      "desc": "Leading curriculum innovation in AI, UX, and Industry 4.0."
+    },
+    {
+      "year": "2021 - Present",
+      "role": "Managing Director",
+      "company": "Aquantrix Pvt Ltd",
+      "desc": "Designed AI/IoT water monitoring solutions for 200+ rural households."
+    },
+    {
+      "year": "2014 - 2021",
+      "role": "Senior Manager (IS)",
+      "company": "Shri Hariram Hospital",
+      "desc": "Managed critical IT ecosystems for healthcare, ensuring 24/7 uptime."
+    },
+    {
+      "year": "2019 - 2026",
+      "role": "PhD Scholar",
+      "company": "Suresh Gyan Vihar University",
+      "desc": "Researching 'Use of AI in Healthcare' for early diagnosis."
+    }
+  ]
+}
