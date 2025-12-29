@@ -6,8 +6,6 @@ export default function FireflyParticles() {
   const { theme } = useTheme();
 
   useEffect(() => {
-    if (theme !== 'dark') return;
-
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     let animationFrameId;
@@ -18,43 +16,75 @@ export default function FireflyParticles() {
       canvas.height = window.innerHeight;
     };
 
+    // Configuration based on theme
+    const isDark = theme === 'dark';
+    const particleCount = isDark ? 50 : 30;
+    
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 0.5;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
+        // Dark: Small dots (fireflies), Light: Larger ovals (leaves)
+        this.size = isDark ? Math.random() * 2 + 0.5 : Math.random() * 4 + 2; 
+        
+        // Dark: Float aimlessly, Light: Fall gently down
+        this.speedX = isDark ? Math.random() * 0.5 - 0.25 : Math.random() * 0.5 - 0.25;
+        this.speedY = isDark ? Math.random() * 0.5 - 0.25 : Math.random() * 0.5 + 0.2;
+        
         this.opacity = Math.random();
+        this.angle = Math.random() * 360; // For leaf rotation
+        this.spin = Math.random() * 0.02 - 0.01;
       }
 
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
-        this.opacity += Math.random() * 0.02 - 0.01;
+        
+        // Dark: Twinkle, Light: Steady fade
+        this.opacity += isDark ? Math.random() * 0.02 - 0.01 : 0;
+        this.angle += this.spin;
 
-        // Wrap around screen
+        // Wrap around
         if (this.x < 0) this.x = canvas.width;
         if (this.x > canvas.width) this.x = 0;
-        if (this.y < 0) this.y = canvas.height;
-        if (this.y > canvas.height) this.y = 0;
+        if (this.y < -10) this.y = canvas.height; // Allow to fall from top
+        if (this.y > canvas.height) this.y = -10;
         
-        // Keep opacity visible
+        // Clamp opacity
         if (this.opacity < 0) this.opacity = 0;
         if (this.opacity > 1) this.opacity = 1;
       }
 
       draw() {
-        ctx.fillStyle = `rgba(255, 255, 200, ${this.opacity})`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle);
+        ctx.globalAlpha = this.opacity * 0.6;
+
+        if (isDark) {
+          // Firefly: Glowing Circle
+          ctx.fillStyle = "rgba(255, 255, 200, 1)";
+          ctx.beginPath();
+          ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+          ctx.fill();
+          // Glow
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = "white";
+        } else {
+          // Herb/Leaf: Green Oval
+          ctx.fillStyle = "rgba(86, 146, 104, 0.8)"; // Leaf Green
+          ctx.beginPath();
+          ctx.ellipse(0, 0, this.size, this.size / 2, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        
+        ctx.restore();
       }
     }
 
     const init = () => {
       particles = [];
-      for (let i = 0; i < 50; i++) {
+      for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
       }
     };
@@ -77,9 +107,7 @@ export default function FireflyParticles() {
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [theme]);
-
-  if (theme !== 'dark') return null;
+  }, [theme]); // Re-run when theme changes
 
   return (
     <canvas 

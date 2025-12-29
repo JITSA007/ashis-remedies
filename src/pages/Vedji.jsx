@@ -1,21 +1,136 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, Activity, Bot, MessageSquare, ArrowRight, Stethoscope, AlertCircle } from 'lucide-react';
+import { User, Activity, Bot, MessageSquare, ArrowRight, Stethoscope, Send, Sparkles } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import BodyMap from '../components/remedies/BodyMap';
 import DoshaQuiz from '../components/vedji/DoshaQuiz';
+import remediesData from '../data/remedies.json'; // Importing the Brain
 
 export default function Vedji() {
   const [activeTab, setActiveTab] = useState('visual'); // 'visual', 'quiz', 'ai'
   const [selectedBodyPart, setSelectedBodyPart] = useState(null);
 
+  // --- ASHI AI STATE ---
+  const [chatHistory, setChatHistory] = useState([
+    { type: 'bot', text: "Namaste! I am Ashi AI, your Ayurvedic assistant. I can help with:\n• Symptoms (e.g., 'dry cough', 'headache')\n• Ingredients (e.g., 'uses of turmeric')\n• Dosha info (e.g., 'what is pitta?')" }
+  ]);
+  const [chatInput, setChatInput] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const chatEndRef = useRef(null);
+
+  // Auto-scroll to bottom of chat
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatHistory, isTyping]);
+
   const handleBodySelect = (part) => {
     setSelectedBodyPart(part);
   };
 
+  // --- AI LOGIC ENGINE (Expanded V2) ---
+  const generateResponse = (query) => {
+    const lowerQ = query.toLowerCase();
+    
+    // 1. Greetings & Persona
+    if (lowerQ.match(/\b(hi|hello|namaste|hey|greetings)\b/)) {
+      return "Namaste! I am Ashi, your Ayurvedic guide. How is your health today? You can ask me about remedies, ingredients, or your body type (Dosha).";
+    }
+    if (lowerQ.includes("who are you") || lowerQ.includes("what are you")) {
+      return "I am Ashi AI, a digital assistant trained on the principles of Ayurveda and modern data science, created to bridge tradition with technology.";
+    }
+    if (lowerQ.includes("thank")) {
+      return "You are very welcome! Nature heals best when shared.";
+    }
+
+    // 2. Dosha Specific Knowledge
+    if (lowerQ.includes("vata")) {
+      return "**Vata (Air & Ether):** The energy of movement.\n• *Signs of Imbalance:* Anxiety, dry skin, constipation, insomnia, feeling cold.\n• *Balancing Tips:* Keep warm, eat cooked/oily foods, maintain a regular routine.";
+    }
+    if (lowerQ.includes("pitta")) {
+      return "**Pitta (Fire & Water):** The energy of transformation.\n• *Signs of Imbalance:* Anger, heartburn, inflammation, skin rashes, perfectionism.\n• *Balancing Tips:* Stay cool, avoid spicy/fried foods, enjoy sweet fruits, and practice moderation.";
+    }
+    if (lowerQ.includes("kapha")) {
+      return "**Kapha (Earth & Water):** The energy of structure.\n• *Signs of Imbalance:* Lethargy, weight gain, congestion, depression, attachment.\n• *Balancing Tips:* Exercise daily, eat light/dry/spicy foods, and wake up early.";
+    }
+
+    // 3. Search Remedies by Symptom (Enhanced)
+    const matchingRemedies = remediesData.filter(r => 
+      r.symptoms.some(s => lowerQ.includes(s.toLowerCase())) ||
+      r.title.toLowerCase().includes(lowerQ) ||
+      (r.description && r.description.toLowerCase().includes(lowerQ))
+    );
+
+    if (matchingRemedies.length > 0) {
+      // List top 2 results
+      const topPicks = matchingRemedies.slice(0, 2);
+      
+      let response = `I found ${matchingRemedies.length} remedy${matchingRemedies.length > 1 ? 's' : ''} for you:\n\n`;
+      
+      topPicks.forEach(pick => {
+        const ingredientsList = Array.isArray(pick.ingredients) 
+          ? pick.ingredients.join(', ').replace(/ing_/g, '') 
+          : pick.ingredients;
+          
+        response += `🌿 **${pick.title}**\n`;
+        response += `• *Uses:* ${ingredientsList}\n`;
+        response += `• *Wisdom:* ${pick.tradition}\n\n`;
+      });
+
+      if (matchingRemedies.length > 2) {
+        response += `*Tip: Check the full Remedies Database for more options.*`;
+      }
+      return response;
+    }
+
+    // 4. Search by Ingredient
+    const ingredientMatch = remediesData.filter(r => 
+        Array.isArray(r.ingredients) && r.ingredients.some(i => lowerQ.includes(i.replace('ing_', '').toLowerCase()))
+    );
+    
+    if (ingredientMatch.length > 0) {
+        const uniqueRemedies = [...new Set(ingredientMatch.map(r => r.title))].slice(0, 3).join(", ");
+        return `**${query}** is a powerful ingredient! We use it in remedies like: ${uniqueRemedies}.\nIt is generally good for balancing the body's systems.`;
+    }
+
+    // 5. General Wellness Concepts (Fallbacks)
+    if (lowerQ.includes("sleep") || lowerQ.includes("insomnia")) {
+        return "Sleep issues often relate to high Vata. Try drinking warm milk with nutmeg (Jaiphal) before bed, or massage your feet with warm sesame oil.";
+    }
+    if (lowerQ.includes("digestion") || lowerQ.includes("stomach") || lowerQ.includes("gas")) {
+        return "Digestion (Agni) is the root of health. Ginger tea before meals can ignite your digestive fire. Avoid drinking cold water with food.";
+    }
+    if (lowerQ.includes("stress") || lowerQ.includes("anxiety")) {
+        return "For stress, Ayurveda recommends Ashwagandha and deep breathing (Pranayama). Try to stick to a daily routine (Dinacharya) to calm the mind.";
+    }
+    if (lowerQ.includes("skin") || lowerQ.includes("acne")) {
+        return "Skin issues often reflect Pitta imbalance (heat) or blood impurities. Neem and Turmeric are excellent purifiers. Avoid excessive sour or spicy foods.";
+    }
+
+    // 6. Final Fallback
+    return "I am still learning the vast ocean of Ayurveda. Try searching for specific symptoms (e.g., 'Headache', 'Cold'), ingredients (e.g., 'Turmeric'), or ask about 'Vata', 'Pitta', or 'Kapha'.";
+  };
+
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+    if (!chatInput.trim()) return;
+
+    // Add User Message
+    const userMsg = { type: 'user', text: chatInput };
+    setChatHistory(prev => [...prev, userMsg]);
+    setChatInput('');
+    setIsTyping(true);
+
+    // Simulate Thinking Delay
+    setTimeout(() => {
+      const responseText = generateResponse(userMsg.text);
+      setChatHistory(prev => [...prev, { type: 'bot', text: responseText }]);
+      setIsTyping(false);
+    }, 1200);
+  };
+
   return (
-    <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 bg-soil-50 dark:bg-night-900">
+    <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 bg-soil-50 dark:bg-night-900 transition-colors duration-300">
       <Helmet>
         <title>Vedji Clinic | Digital Diagnosis</title>
         <meta name="description" content="Consult our digital Ayurvedic doctor. Visual diagnosis, Dosha analysis, and AI recommendations." />
@@ -72,7 +187,7 @@ export default function Vedji() {
         <div className="min-h-[500px]">
           <AnimatePresence mode="wait">
             
-            {/* TAB 1: Visual Body Map (Split Screen) */}
+            {/* TAB 1: Visual Body Map */}
             {activeTab === 'visual' && (
               <motion.div
                 key="visual"
@@ -174,45 +289,81 @@ export default function Vedji() {
               </motion.div>
             )}
 
-            {/* TAB 3: Ashi AI (Mockup) */}
+            {/* TAB 3: Ashi AI (FUNCTIONAL) */}
             {activeTab === 'ai' && (
               <motion.div
                 key="ai"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="bg-white dark:bg-night-800 rounded-3xl overflow-hidden shadow-lg border border-soil-100 dark:border-night-700 max-w-2xl mx-auto"
+                className="bg-white dark:bg-night-800 rounded-3xl overflow-hidden shadow-lg border border-soil-100 dark:border-night-700 max-w-2xl mx-auto flex flex-col h-[600px]"
               >
                 {/* Chat Header */}
-                <div className="bg-leaf-600 p-4 flex items-center text-white">
-                  <Bot className="w-6 h-6 mr-3" />
+                <div className="bg-leaf-600 p-4 flex items-center text-white shrink-0">
+                  <div className="p-2 bg-white/20 rounded-full mr-3">
+                    <Bot className="w-6 h-6" />
+                  </div>
                   <div>
-                    <h3 className="font-bold">Ashi AI</h3>
+                    <h3 className="font-bold flex items-center">
+                      Ashi AI <span className="ml-2 text-[10px] bg-white/20 px-2 py-0.5 rounded-full">BETA</span>
+                    </h3>
                     <p className="text-xs text-leaf-100">Ayurvedic Intelligence Model v1.0</p>
                   </div>
                 </div>
                 
                 {/* Chat Window */}
-                <div className="h-80 bg-soil-50 dark:bg-night-900 p-4 overflow-y-auto space-y-4">
-                  <div className="flex justify-start">
-                    <div className="bg-white dark:bg-night-800 p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[80%] text-sm text-soil-800 dark:text-soil-200">
-                      Namaste! I am Ashi AI. I can check interactions between herbs or suggest remedies for the season. How can I help?
+                <div className="flex-1 bg-soil-50 dark:bg-night-900 p-4 overflow-y-auto space-y-4">
+                  {chatHistory.map((msg, idx) => (
+                    <div key={idx} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                      <div className={`max-w-[80%] p-3 rounded-2xl text-sm leading-relaxed shadow-sm ${
+                        msg.type === 'user' 
+                          ? 'bg-leaf-600 text-white rounded-tr-none' 
+                          : 'bg-white dark:bg-night-800 text-soil-800 dark:text-soil-200 rounded-tl-none border border-soil-100 dark:border-night-700'
+                      }`}>
+                        {msg.type === 'bot' && (
+                          <div className="flex items-center text-xs font-bold text-leaf-500 mb-1">
+                            <Sparkles className="w-3 h-3 mr-1" /> Ashi
+                          </div>
+                        )}
+                        <span className="whitespace-pre-wrap">{msg.text}</span>
+                      </div>
                     </div>
-                  </div>
+                  ))}
+                  
+                  {isTyping && (
+                    <div className="flex justify-start">
+                      <div className="bg-white dark:bg-night-800 p-3 rounded-2xl rounded-tl-none shadow-sm flex space-x-1 items-center">
+                        <div className="w-2 h-2 bg-leaf-400 rounded-full animate-bounce" style={{ animationDelay: '0s' }} />
+                        <div className="w-2 h-2 bg-leaf-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+                        <div className="w-2 h-2 bg-leaf-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
+                      </div>
+                    </div>
+                  )}
+                  <div ref={chatEndRef} />
                 </div>
 
-                {/* Input Area (Mock) */}
-                <div className="p-4 border-t border-soil-200 dark:border-night-700 flex space-x-2">
-                  <input 
-                    disabled
-                    type="text" 
-                    placeholder="Coming soon..." 
-                    className="flex-grow px-4 py-2 rounded-full bg-soil-100 dark:bg-night-950 border-none focus:ring-2 focus:ring-leaf-500 opacity-50 cursor-not-allowed" 
-                  />
-                  <button disabled className="p-2 bg-leaf-600 text-white rounded-full opacity-50 cursor-not-allowed">
-                    <MessageSquare className="w-5 h-5" />
-                  </button>
-                </div>
+                {/* Input Area */}
+                <form onSubmit={handleSendMessage} className="p-4 border-t border-soil-200 dark:border-night-700 bg-white dark:bg-night-800 shrink-0">
+                  <div className="flex space-x-2">
+                    <input 
+                      type="text" 
+                      value={chatInput}
+                      onChange={(e) => setChatInput(e.target.value)}
+                      placeholder="Ask about a symptom or herb..." 
+                      className="flex-grow px-4 py-3 rounded-xl bg-soil-50 dark:bg-night-900 border border-soil-200 dark:border-night-700 focus:ring-2 focus:ring-leaf-500 outline-none text-soil-900 dark:text-soil-100 placeholder-soil-400" 
+                    />
+                    <button 
+                      type="submit"
+                      disabled={!chatInput.trim() || isTyping}
+                      className="p-3 bg-leaf-600 hover:bg-leaf-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl transition-colors shadow-md"
+                    >
+                      <Send className="w-5 h-5" />
+                    </button>
+                  </div>
+                  <p className="text-[10px] text-center text-soil-400 mt-2">
+                    Ashi AI provides general wellness information, not medical advice.
+                  </p>
+                </form>
               </motion.div>
             )}
 

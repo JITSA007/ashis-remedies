@@ -1,0 +1,86 @@
+[
+  {
+    "id": "shishira",
+    "name": "Shishira (Late Winter)",
+    "months": [0, 1],
+    "themeClass": "from-slate-50 to-blue-50 dark:from-slate-950 dark:to-blue-950",
+    "icon": "Snowflake",
+    "tagline": "Preserve your inner warmth.",
+    "tips": [
+      "Drink warm water throughout the day.",
+      "Include ginger, garlic, and pippali in diet.",
+      "Perform Abhyanga (oil massage) daily."
+    ],
+    "foods": ["Sesame", "Jaggery", "Ghee", "Root Vegetables"]
+  },
+  {
+    "id": "vasanta",
+    "name": "Vasanta (Spring)",
+    "months": [2, 3],
+    "themeClass": "from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950",
+    "icon": "Flower",
+    "tagline": "Time to detox and renew.",
+    "tips": [
+      "Wake up early and exercise to reduce Kapha.",
+      "Avoid heavy, oily, and sweet foods.",
+      "Consume bitter and astringent tastes."
+    ],
+    "foods": ["Honey", "Barley", "Spinach", "Turmeric"]
+  },
+  {
+    "id": "grishma",
+    "name": "Grishma (Summer)",
+    "months": [4, 5],
+    "themeClass": "from-orange-50 to-yellow-50 dark:from-orange-950 dark:to-yellow-950",
+    "icon": "Sun",
+    "tagline": "Stay cool and hydrated.",
+    "tips": [
+      "Stay hydrated with natural coolants.",
+      "Avoid spicy, sour, and salty foods.",
+      "Take a nap in the afternoon if tired."
+    ],
+    "foods": ["Watermelon", "Cucumber", "Coconut Water", "Fennel Seeds"]
+  },
+  {
+    "id": "varsha",
+    "name": "Varsha (Monsoon)",
+    "months": [6, 7],
+    "themeClass": "from-slate-100 to-teal-50 dark:from-slate-900 dark:to-teal-900",
+    "icon": "CloudRain",
+    "tagline": "Protect your digestion (Agni).",
+    "tips": [
+      "Drink boiled water.",
+      "Eat light, fresh, and warm food.",
+      "Keep your feet dry and clean."
+    ],
+    "foods": ["Ginger Tea", "Moong Dal", "Rice", "Amla"]
+  },
+  {
+    "id": "sharad",
+    "name": "Sharad (Autumn)",
+    "months": [8, 9],
+    "themeClass": "from-amber-50 to-orange-50 dark:from-amber-950 dark:to-orange-950",
+    "icon": "Wind",
+    "tagline": "Balance the heat of Pitta.",
+    "tips": [
+      "Enjoy the moonlight.",
+      "Eat sweet, bitter, and astringent foods.",
+      "Blood purification therapies are beneficial."
+    ],
+    "foods": ["Ghee", "Rice", "Milk", "Raisins"]
+  },
+  {
+    "id": "hemanta",
+    "name": "Hemanta (Early Winter)",
+    "months": [10, 11],
+    "themeClass": "from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950",
+    "icon": "ThermometerSnowflake",
+    "tagline": "Build strength and immunity.",
+    "tips": [
+      "Appetite is strong; eat nourishing foods.",
+      "Consume sweet, sour, and salty tastes.",
+      "Keep your head and ears covered."
+    ],
+    "foods": ["Nuts", "Dates", "Milk Products", "Wheat"]
+  }
+]
