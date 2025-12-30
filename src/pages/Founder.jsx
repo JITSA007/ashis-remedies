@@ -15,7 +15,7 @@ export default function Founder() {
         className="max-w-4xl mx-auto text-center mb-16"
       >
         <div className="w-32 h-32 mx-auto bg-gradient-to-br from-leaf-400 to-soil-400 rounded-full mb-6 shadow-xl flex items-center justify-center text-4xl">
-          {/* Placeholder for real photo */}
+          {https://media.licdn.com/dms/image/v2/D5603AQHuj35hjCbmAQ/profile-displayphoto-scale_400_400/B56ZolRX86JQAk-/0/1761561904715?e=1768435200&v=beta&t=_QOiyLv72xGQafwZrKl8QheIv2GKeLzZySmW-VET5Uk}
           👨‍🏫
         </div>
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-leaf-800 dark:text-leaf-300 mb-2">
