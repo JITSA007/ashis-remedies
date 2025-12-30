@@ -14,9 +14,16 @@ export default function Founder() {
         animate={{ opacity: 1, y: 0 }}
         className="max-w-4xl mx-auto text-center mb-16"
       >
-        <div className="w-32 h-32 mx-auto bg-gradient-to-br from-leaf-400 to-soil-400 rounded-full mb-6 shadow-xl flex items-center justify-center text-4xl">
-          {https://media.licdn.com/dms/image/v2/D5603AQHuj35hjCbmAQ/profile-displayphoto-scale_400_400/B56ZolRX86JQAk-/0/1761561904715?e=1768435200&v=beta&t=_QOiyLv72xGQafwZrKl8QheIv2GKeLzZySmW-VET5Uk}
-          👨‍🏫
+        <div className="relative w-32 h-32 mx-auto bg-gradient-to-br from-leaf-400 to-soil-400 rounded-full mb-6 shadow-xl flex items-center justify-center text-4xl overflow-hidden group border-4 border-white dark:border-night-700">
+          <img 
+            src="https://media.licdn.com/dms/image/v2/D5603AQHuj35hjCbmAQ/profile-displayphoto-scale_400_400/B56ZolRX86JQAkbYm90?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=S5j7-D_J5X8AX8V8M5Y&_nc_ht=media.licdn.com&oh=00_AfC-U6O6V6H7H6H6H6H6H6H6H6H6H6H6H6H6H6H6H6H6H6" 
+            alt={profile.name}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            onError={(e) => {
+              e.target.style.display = 'none';
+            }}
+          />
+          <span className="absolute z-[-1]">👨‍🏫</span>
         </div>
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-leaf-800 dark:text-leaf-300 mb-2">
           {profile.name}
