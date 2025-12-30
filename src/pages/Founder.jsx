@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Cpu, Sprout, Award, BookOpen, MapPin, Quote, Lightbulb, Target } from 'lucide-react';
+import { Cpu, Sprout, Award, BookOpen, MapPin, Quote, Lightbulb, Target, Sparkles } from 'lucide-react';
 import founderData from '../data/founder.json';
 
 export default function Founder() {
@@ -53,7 +53,7 @@ export default function Founder() {
         </div>
       </motion.div>
 
-      {/* Philosophy Section - NEW EXPANSION */}
+      {/* Philosophy Section */}
       <motion.div 
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -196,7 +196,7 @@ export default function Founder() {
         </div>
       </div>
 
-      {/* Closing Call to Action - NEW EXPANSION */}
+      {/* Closing Call to Action */}
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
