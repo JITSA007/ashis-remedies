@@ -7,11 +7,19 @@
     "icon": "Snowflake",
     "tagline": "Preserve your inner warmth.",
     "tips": [
-      "Drink warm water throughout the day.",
-      "Include ginger, garlic, and pippali in diet.",
-      "Perform Abhyanga (oil massage) daily."
+      "Drink warm water throughout the day to maintain Agni.",
+      "Include ginger, garlic, and pippali in every meal.",
+      "Perform Abhyanga (oil massage) with warm sesame oil daily.",
+      "Avoid cold, dry, and light foods that increase Vata."
     ],
-    "foods": ["Sesame", "Jaggery", "Ghee", "Root Vegetables"]
+    "lifestyle_tips": [
+      "Exposure to sunlight for at least 20 minutes.",
+      "Wear warm, layered clothing made of wool or silk.",
+      "Practice vigorous exercise to keep the body warm."
+    ],
+    "aggravated_dosha": "Vata",
+    "pacified_dosha": "Kapha",
+    "foods": ["Sesame", "Jaggery", "Ghee", "Root Vegetables", "Ginger", "Black Pepper", "Amla"]
   },
   {
     "id": "vasanta",
@@ -21,11 +29,19 @@
     "icon": "Flower",
     "tagline": "Time to detox and renew.",
     "tips": [
-      "Wake up early and exercise to reduce Kapha.",
-      "Avoid heavy, oily, and sweet foods.",
-      "Consume bitter and astringent tastes."
+      "Wake up early and perform exercise to reduce accumulated Kapha.",
+      "Avoid heavy, oily, and sweet foods like dairy or cold drinks.",
+      "Consume bitter and astringent tastes to dry up excess moisture.",
+      "Sip warm water with a dash of honey."
     ],
-    "foods": ["Honey", "Barley", "Spinach", "Turmeric"]
+    "lifestyle_tips": [
+      "Practice Nasya (nasal drops) to clear sinuses.",
+      "Walking in nature as the earth awakens.",
+      "Nadi Shodhana Pranayama for mental clarity."
+    ],
+    "aggravated_dosha": "Kapha",
+    "pacified_dosha": "Vata",
+    "foods": ["Honey", "Barley", "Spinach", "Turmeric", "Neem", "Bitter Gourd", "Millet"]
   },
   {
     "id": "grishma",
@@ -35,11 +51,19 @@
     "icon": "Sun",
     "tagline": "Stay cool and hydrated.",
     "tips": [
-      "Stay hydrated with natural coolants.",
-      "Avoid spicy, sour, and salty foods.",
-      "Take a nap in the afternoon if tired."
+      "Stay hydrated with natural coolants like rose water or coconut water.",
+      "Avoid spicy, sour, and salty foods that increase internal heat.",
+      "Take a short nap in the afternoon to preserve energy.",
+      "Favor sweet, cold, and liquid foods."
     ],
-    "foods": ["Watermelon", "Cucumber", "Coconut Water", "Fennel Seeds"]
+    "lifestyle_tips": [
+      "Walk in the moonlight or near water bodies.",
+      "Apply sandalwood paste for its cooling effect.",
+      "Wear light, breathable cotton clothing."
+    ],
+    "aggravated_dosha": "Pitta",
+    "pacified_dosha": "Kapha",
+    "foods": ["Watermelon", "Cucumber", "Coconut Water", "Fennel Seeds", "Mint", "Pomegranate", "Milk"]
   },
   {
     "id": "varsha",
@@ -49,11 +73,19 @@
     "icon": "CloudRain",
     "tagline": "Protect your digestion (Agni).",
     "tips": [
-      "Drink boiled water.",
-      "Eat light, fresh, and warm food.",
-      "Keep your feet dry and clean."
+      "Drink only boiled and filtered water.",
+      "Eat light, fresh, and warm food as digestion is weakest now.",
+      "Keep your feet dry and clean to avoid fungal issues.",
+      "Include a small amount of honey in your diet."
     ],
-    "foods": ["Ginger Tea", "Moong Dal", "Rice", "Amla"]
+    "lifestyle_tips": [
+      "Avoid sleeping during the daytime.",
+      "Keep surroundings dry and use incense to purify the air.",
+      "Gentle stretching rather than heavy exercise."
+    ],
+    "aggravated_dosha": "Vata & Pitta",
+    "pacified_dosha": "Kapha",
+    "foods": ["Ginger Tea", "Moong Dal", "Rice", "Amla", "Old Barley", "Garlic", "Thin soups"]
   },
   {
     "id": "sharad",
@@ -63,11 +95,19 @@
     "icon": "Wind",
     "tagline": "Balance the heat of Pitta.",
     "tips": [
-      "Enjoy the moonlight.",
-      "Eat sweet, bitter, and astringent foods.",
-      "Blood purification therapies are beneficial."
+      "Enjoy the moonlight; it is particularly healing this season.",
+      "Eat sweet, bitter, and astringent foods to calm Pitta.",
+      "Avoid excessive sunlight exposure during mid-day.",
+      "Cleanse the blood with cooling herbs like Manjistha."
     ],
-    "foods": ["Ghee", "Rice", "Milk", "Raisins"]
+    "lifestyle_tips": [
+      "Practice Pitta-pacifying yoga like Sheetali Pranayama.",
+      "Panchakarma (Virechana) is highly recommended now.",
+      "Wear light colors like white or soft blue."
+    ],
+    "aggravated_dosha": "Pitta",
+    "pacified_dosha": "Vata",
+    "foods": ["Ghee", "Rice", "Milk", "Raisins", "Cabbage", "Asparagus", "Sweet Potato"]
   },
   {
     "id": "hemanta",
@@ -77,10 +117,18 @@
     "icon": "ThermometerSnowflake",
     "tagline": "Build strength and immunity.",
     "tips": [
-      "Appetite is strong; eat nourishing foods.",
-      "Consume sweet, sour, and salty tastes.",
-      "Keep your head and ears covered."
+      "The appetite is strongest now; eat nourishing, heavy foods.",
+      "Consume sweet, sour, and salty tastes to balance Vata.",
+      "Keep your head and ears covered when outdoors.",
+      "Perform daily self-massage with oil before bathing."
     ],
-    "foods": ["Nuts", "Dates", "Milk Products", "Wheat"]
+    "lifestyle_tips": [
+      "Enjoy the warmth of a fire or sauna.",
+      "Maintain a regular routine for eating and sleeping.",
+      "Weight training and heavy exercise are most beneficial now."
+    ],
+    "aggravated_dosha": "Vata (minimal)",
+    "pacified_dosha": "Pitta",
+    "foods": ["Nuts", "Dates", "Milk Products", "Wheat", "Almonds", "Sesame", "Warm soups"]
   }
 ]

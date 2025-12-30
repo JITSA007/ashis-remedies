@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { useState, useMemo, useEffect, useRef } from 'react';
 import Navbar from './components/layout/Navbar';
@@ -13,92 +13,148 @@ import Admin from './pages/Admin';
 import GuestEditor from './pages/GuestEditor';
 import NotFound from './pages/NotFound';
 import seasonsData from './data/seasons.json';
-import { Volume2, VolumeX } from 'lucide-react';
+import { Volume2, VolumeX, AlertCircle } from 'lucide-react';
 
-// OM Chant Component
+/**
+ * Global Scroll Correction
+ * Ensures that every route transition resets the scroll position to the top.
+ */
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
+/**
+ * OM Chant Component
+ * Plays an authentic, deep-frequency Om chant.
+ * Uses a stable, direct-link source.
+ */
 function OmPlayer() {
   const [playing, setPlaying] = useState(false);
+  const [error, setError] = useState(false);
   const audioRef = useRef(null);
 
-  // Toggle Audio
-  const toggleAudio = () => {
-    if (playing) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play();
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.2; // Very soft base volume
     }
-    setPlaying(!playing);
+  }, []);
+
+  const toggleAudio = async () => {
+    if (!audioRef.current) return;
+    try {
+      if (playing) {
+        audioRef.current.pause();
+        setPlaying(false);
+      } else {
+        // Attempting playback - most browsers require a user interaction (like this click)
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setPlaying(true);
+              setError(false);
+            })
+            .catch((err) => {
+              console.error("Autoplay blocked or link failed:", err);
+              setError(true);
+            });
+        }
+      }
+    } catch (err) {
+      setError(true);
+    }
   };
 
   return (
     <div className="fixed bottom-6 left-6 z-50">
-      <audio ref={audioRef} loop src="https://cdn.pixabay.com/download/audio/2022/03/09/audio_039603099c.mp3?filename=om-chant-18548.mp3" />
+      {/* Authentic Meditative Om Sound Source */}
+      <audio 
+        ref={audioRef} 
+        loop 
+        src="src/Sound/om.mp3" // Stable test link; Replace with your specific .mp3 in public folder for production
+        onError={() => setError(true)}
+      />
+      
       <button 
         onClick={toggleAudio}
-        className={`p-3 rounded-full shadow-lg border-2 transition-all duration-500 flex items-center justify-center ${
+        className={`p-3 rounded-full shadow-lg border-2 transition-all duration-700 flex items-center justify-center relative ${
           playing 
-            ? 'bg-orange-500 border-orange-300 text-white shadow-orange-500/50 scale-110' 
+            ? 'bg-orange-600 border-orange-400 text-white shadow-orange-600/50 scale-110' 
             : 'bg-white dark:bg-night-800 border-soil-200 dark:border-night-600 text-soil-500 dark:text-soil-400'
         }`}
-        title={playing ? "Pause Om Chant" : "Play Om Chant"}
+        title={error ? "Audio Link Error" : (playing ? "Pause Meditation" : "Start Om Chant")}
       >
-        {playing ? <Volume2 className="w-5 h-5 animate-pulse" /> : <VolumeX className="w-5 h-5" />}
+        {error ? <AlertCircle className="w-5 h-5 text-red-500" /> : (
+          playing ? <Volume2 className="w-5 h-5 animate-pulse" /> : <VolumeX className="w-5 h-5" />
+        )}
+        
+        {playing && (
+          <>
+            <span className="absolute inset-0 rounded-full bg-orange-400 opacity-25 animate-ping"></span>
+            <span className="absolute inset-0 rounded-full bg-orange-400 opacity-10 animate-pulse scale-150"></span>
+          </>
+        )}
       </button>
     </div>
   );
 }
 
+/**
+ * Cosmic Theme Wrapper
+ * Manages Season-based colors and Moon-based background gradients.
+ */
 function AppContent() {
   const { theme } = useTheme();
   
-  // 1. Calculate Cosmic Data (Season & Moon)
   const cosmicData = useMemo(() => {
     const today = new Date();
     const month = today.getMonth();
     
-    // Moon Phase (0 = New, 0.5 = Full, 1 = New)
+    // Moon Phase Logic: 0 = New Moon, 0.5 = Full Moon
     const knownNewMoon = new Date('2024-01-11').getTime();
     const cycle = 29.53 * 24 * 60 * 60 * 1000;
-    const diff = today.getTime() - knownNewMoon;
-    const phase = (diff % cycle) / cycle;
+    const phase = ((today.getTime() - knownNewMoon) % cycle) / cycle;
 
-    // Current Season
+    // Current Ayurvedic Season
     const currentSeason = seasonsData.find(s => s.months.includes(month)) || seasonsData[0];
 
     return { phase, season: currentSeason };
   }, []);
 
-  // 2. Generate Dynamic Styles based on Theme + Cosmic Data
   const getBackgroundStyle = () => {
     if (theme === 'dark') {
-      // Moon Logic: Darker near New Moon (0/1), Brighter/Blue near Full Moon (0.5)
-      const brightness = 1 - (2 * Math.abs(cosmicData.phase - 0.5)); // 0(new) to 1(full)
-      // Base dark color -> Moon Glow color
-      const color1 = '#0f172a'; // Slate 900
-      const color2 = '#1e1b4b'; // Indigo 950
+      // Dark Mode: Cosmic Moon Glow
+      const brightness = 1 - (2 * Math.abs(cosmicData.phase - 0.5)); 
+      const glowIntensity = brightness > 0.5 ? '0.35' : '0.15';
+      const glowColor = `rgba(67, 56, 202, ${glowIntensity})`;
       
-      // Dynamic Radial Gradient simulating moon glow from top-right
       return {
-        background: `radial-gradient(circle at 70% 20%, ${brightness > 0.5 ? '#312e81' : '#1e293b'} 0%, ${color1} 60%, #020617 100%)`,
+        background: `radial-gradient(circle at 85% 15%, ${glowColor} 0%, #0f172a 45%, #020617 100%)`,
         backgroundAttachment: 'fixed'
       };
     } else {
-      // Rishi/Light Logic: Warm Earthy Tones + Seasonal Tint
-      // We use the seasonal theme class but enforce a specific "parchment" feel
+      // Light Mode: Rishi/Parchment with medicinal herb silhouettes
       return {
-        // Fallback gradient combined with a subtle texture overlay URL (simulated via CSS pattern)
-        backgroundImage: `
-          linear-gradient(to bottom right, rgba(255,255,255,0.9), rgba(255,247,237,0.8)), 
-          url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d6d3d1' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+        background: `
+          linear-gradient(to bottom right, rgba(255, 255, 255, 0.85), rgba(254, 243, 199, 0.7)),
+          url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10c0 10-10 10-10 20s10 10 10 20-10 10-10 20' stroke='%23427452' stroke-opacity='0.04' fill='none'/%3E%3Cpath d='M70 10c0 10 10 10 10 20s-10 10-10 20 10 10 10 20' stroke='%23427452' stroke-opacity='0.04' fill='none'/%3E%3C/svg%3E"),
+          #fffbeb
         `,
-        backgroundColor: '#fef3c7', // Amber-50 base
         backgroundAttachment: 'fixed'
       };
     }
   };
 
   return (
-    <div style={getBackgroundStyle()} className="flex flex-col min-h-screen transition-all duration-1000">
+    <div 
+      style={getBackgroundStyle()} 
+      className={`flex flex-col min-h-screen transition-all duration-1000 ${cosmicData.season.themeClass.split(' ').filter(c => c.startsWith('bg-')).join(' ')}`}
+    >
+      <ScrollToTop />
       <Navbar />
       <main className="flex-grow">
         <Routes>
