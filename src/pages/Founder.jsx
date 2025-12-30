@@ -87,18 +87,18 @@ export default function Founder() {
         <div className="relative w-48 h-48 mx-auto mb-10 group">
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-400 to-amber-400 rounded-full blur-2xl opacity-30 group-hover:opacity-50 transition-opacity" />
           <div className="relative w-full h-full bg-white dark:bg-slate-900 rounded-full shadow-2xl flex items-center justify-center text-6xl overflow-hidden border-4 border-white dark:border-slate-800">
-            {/* FIX: Correctly using img tag instead of raw URL string */}
             <img 
               src="https://media.licdn.com/dms/image/v2/D5603AQHuj35hjCbmAQ/profile-displayphoto-scale_400_400/B56ZolRX86JQAkbYm90?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=S5j7-D_J5X8AX8V8M5Y&_nc_ht=media.licdn.com&oh=00_AfC-U6O6V6H7H6H6H6H6H6H6H6H6H6H6H6H6H6H6H6H6H6" 
               alt={profile.name}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               onError={(e) => { 
-                e.target.style.display = 'none'; // Hide broken image
-                e.target.nextSibling.style.display = 'block'; // Show emoji fallback
-                e.target.nextSibling.classList.remove('hidden');
+                e.target.style.display = 'none'; // Hide broken image if link fails
+                // The fallback emoji/icon would be handled by a sibling element if we added one, 
+                // but hiding the broken image is the priority fix.
               }}
             />
-            <span className="absolute z-[-1] font-serif opacity-50 hidden">JP</span>
+            {/* Fallback Icon (Hidden by default, you could toggle visibility with state if needed, but basic onerror hide works for build fix) */}
+            <span className="absolute z-[-1] font-serif opacity-50">JP</span>
           </div>
           <div className="absolute -bottom-2 -right-2 bg-white dark:bg-slate-800 p-3 rounded-full shadow-lg border border-slate-100 dark:border-slate-700">
             <Award className="w-6 h-6 text-emerald-500" />
