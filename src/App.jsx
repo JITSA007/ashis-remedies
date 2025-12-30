@@ -75,7 +75,7 @@ function OmPlayer() {
       <audio 
         ref={audioRef} 
         loop 
-        src="src/Sound/om.mp3" // Stable test link; Replace with your specific .mp3 in public folder for production
+        src="public/Sound/om.mp3" // Stable test link; Replace with your specific .mp3 in public folder for production
         onError={() => setError(true)}
       />
       
